@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    {% block webhead %}
+
+    {% endblock %}
+</head>
+<style>
+    a{
+        text-decoration: none;
+    }
+
+    a:link {
+        color: #000000;
+        text-decoration: none;
+    }
+    a:visited {
+        color: #000000;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #999999;
+        text-decoration: none;
+    }
+</style>
+<body>
+  <div id="app">
+
+      <el-row>
+      <el-col :span="22" :offset="1">
+          <el-container>
+
+          <el-header>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+              <el-menu-item index="5"><a href="{% url "index" %}" style="font-size: 25px; font-family: 'Courier New', Monospace" >胡言乱语的日志</a></el-menu-item>
+{#              <el-menu-item index="2"><a href="">标签</a></el-menu-item>#}
+{#              <el-menu-item index="3"><a href="">分类</a></el-menu-item>#}
+{#              <el-menu-item index="4"><a href="">作者</a></el-menu-item>#}
+{#              <el-menu-item index="5"><i class="el-icon-search"></i></el-menu-item>#}
+            </el-menu>
+            <div class="line"></div>
+
+              <br><br>
+          </el-header>
+
+
+           <el-main>
+              <el-row>
+              {#  主体#}
+                  <el-col :span="20">
+                    {% block webbody %}
+
+                    {% endblock %}
+                  </el-col>
+              {#  侧边栏#}
+                  <el-col :span="6">
+                    {% block rightbody %}
+
+                    {% endblock %}
+                  </el-col>
+              </el-row>
+           </el-main>
+
+
+            <el-footer>
+
+
+            </el-footer>
+
+
+          </el-container>
+      </el-col>
+    </el-row>
+
+
+  </div>
+
+
+
+
+</body>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+    }
+    })
+  </script>
+
+</html>

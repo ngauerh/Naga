@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+
+{% block webhead %}
+    <meta name="title" content="{{ blog_list.title }}">
+    <meta name="Author" content="{{ blog_list.author }}的网络日志 博客">
+    <meta name="Description" content="{{ blog_list.summary }}, {{ blog_list.title }}">
+    <meta name="Keywords" content="{{ blog_list.tags }}, {{ blog_list.category }}">
+
+    <title>{{ blog_list.title }}</title>
+
+{% endblock %}
+
+
+{% block webbody %}
+
+
+
+<h2>{{ blog_list.title }}</h2>
+{#<span><i class="el-icon-edit"></i>{{ blog_list.author }}</span>#}
+<span><i class="el-icon-tickets"></i>{{ blog_list.category }}</span>
+<span><i class="el-icon-date"></i>{{ blog_list.create_at }}</span>
+
+
+
+
+    <hr>
+        {{ blog_list.summary|safe }}
+
+        {{ blog_list.content|safe }}
+
+
+    <hr>
+
+
+    <el-tag type="success">{{ blog_list.tags }}</el-tag>
+    <br><br>
+    <hr>
+
+    <h3>评论</h3>
+
+
+
+{% endblock %}
+
+
+
+
+
