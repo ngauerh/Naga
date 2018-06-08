@@ -19,8 +19,9 @@
 
 <h2>{{ blog_list.title }}</h2>
 {#<span><i class="el-icon-edit"></i>{{ blog_list.author }}</span>#}
-<span><i class="el-icon-tickets"></i>{{ blog_list.category }}</span>
-<span><i class="el-icon-date"></i>{{ blog_list.create_at }}</span>
+<span style="color: grey">{{ blog_list.category }}</span>
+    &nbsp;&nbsp;&nbsp;
+<span style="color: grey">{{ blog_list.create_at }}</span>
 
 
 
@@ -33,13 +34,52 @@
 
     <hr>
 
+{% for tag in tag_list %}
+    <el-tag type="success">
 
-    <el-tag type="success">{{ blog_list.tags }}</el-tag>
+        {{ tag }}
+
+    </el-tag>
+    {% endfor %}
+
     <br><br>
-    <hr>
 
-    <h3>评论</h3>
+<el-collapse>
+  <el-collapse-item title="评论" name="1">
+    <div>
 
+        <el-form ref="form"  action="{% url 'comment' %}" method="post">
+        {% csrf_token %}
+            <el-input v-model="input" placeholder="请输入您的名字" name="username"></el-input>
+        <br><br>
+        <el-input v-model="input" placeholder="请输入您的邮箱" name="email"></el-input>
+        <br><br>
+        <el-input
+          type="textarea"
+          :rows="6"
+          placeholder="请输入您的评论"
+          name="message"
+          v-model="textarea">
+        </el-input>
+            <input type="hidden" name="bid" value="{{ blog_list.id }}">
+            <br><br>
+            <button  type="submit" class="el-button">提交</button>
+    </el-form>
+    </div>
+
+  </el-collapse-item>
+</el-collapse>
+
+    <br>
+
+{% for message in message_list %}
+    <el-card class="box-card">
+        {{ message.name }}
+        <br>
+    {{ message.message }}
+    </el-card>
+    <br>
+{% endfor %}
 
 
 {% endblock %}

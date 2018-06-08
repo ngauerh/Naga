@@ -23,5 +23,10 @@ class MessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'mid', 'message')
 
 
+@admin.register(FriendlyLink)
+class FriendlyLinkAdmin(admin.ModelAdmin):
+    list_display = ('title', 'url')
+
+
 admin.site.register(Tag)
 admin.site.register(Category)

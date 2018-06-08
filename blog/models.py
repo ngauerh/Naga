@@ -63,3 +63,17 @@ class Message(models.Model):
         verbose_name_plural = '评论'
 
 
+class FriendlyLink(models.Model):
+    id = id = models.AutoField(primary_key=True)
+    title = models.CharField('标题', max_length=30)
+    url = models.URLField('链接')
+    message = models.TextField('备注', blank=True)
+    create_at = models.DateTimeField('添加时间')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = '友情链接'
+        verbose_name_plural = '友情链接'
+

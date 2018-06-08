@@ -21,3 +21,7 @@ element-ui
 http://www.aaron-zhao.com/post/1/
 https://www.cnblogs.com/liubiao/p/5300179.html
 
+
+# 部署
+supervisor
+https://blog.csdn.net/wr166/article/details/79051725

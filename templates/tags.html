@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static from staticfiles %}
 
-</body>
-</html>
+{% block webhead %}
+
+
+{% endblock %}
+
+
+{% block webbody %}
+
+    {% for tag in tag_list %}
+
+
+        <a href="{% url 'blogtags' %}?tid={{ tag.id }}"><el-tag type="success" style="font-size: 16px">{{ tag.tag }}</el-tag></a>
+
+    {% endfor %}
+
+
+    {% for ca in ca_list %}
+        <a href="{% url 'blogtags' %}?tid={{ ca.id }}"><el-tag type="success" style="font-size: 16px">{{ ca.category }}</el-tag></a>
+    {% endfor %}
+
+
+
+
+
+
+{% endblock %}
