@@ -32,6 +32,7 @@ else:
 urlpatterns = [
     url(admin_prefix, admin.site.urls),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^u/', include('users.urls')),
     url(r'^', include('blog.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

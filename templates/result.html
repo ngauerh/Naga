@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block webhead %}
+
+
+{% endblock %}
+
+
+{% block webbody %}
+    <br>
+{% for blog in blog_list %}
+    <a href="{% url 'details' blog.id %}" style="font-size: 16px;color: darkslateblue">{{ blog.title }}</a>
+    <br>
+    <hr><br>
+{% endfor %}
+
+
+
+
+
+
+{% endblock %}

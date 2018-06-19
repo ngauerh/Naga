@@ -37,6 +37,11 @@ def index(request):
 
     context['cus_list'] = customer
     context['blog_list'] = b_list
+
+    # 自我简介
+    from users.models import AboutMe
+    a = AboutMe.objects.all()
+    context['about'] = a
     return render(request, 'index.html', context)
 
 

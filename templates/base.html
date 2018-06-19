@@ -46,7 +46,9 @@
               <el-menu-item index="3"><a href="{% url 'categories' %}">分类</a></el-menu-item>
               <el-menu-item index="4"><a href="{% url 'tags' %}">标签</a></el-menu-item>
               <el-menu-item index="6"><a href="">自语</a></el-menu-item>
-              <el-menu-item index="7"><a href="">作者</a></el-menu-item>
+              <el-menu-item index="7"><a href="{% url 'aboutme' %}">作者</a></el-menu-item>
+              <el-menu-item index="7"><a href="{% url 'aboutme' %}">Gist</a></el-menu-item>
+              <el-menu-item index="8"><a href="">RSS</a></el-menu-item>
 {#              <el-menu-item index="5"><i class="el-icon-search"></i></el-menu-item>#}
             </el-menu>
             <div class="line"></div>
@@ -69,7 +71,12 @@
                         <el-card class="box-card">
                           <div class="text item">
 
-                              <a href="">测试侧边栏</a>
+                              <a>关于作者</a>
+                            <div style="font-size: 14px">
+                              {% for foo in about %}
+                                {{ foo.summary |safe }}
+                              {% endfor %}
+                            </div>
 
                           </div>
                         </el-card>
@@ -78,30 +85,30 @@
                           <div class="text item">
 
                               <a href="">标签云</a>
-
+                              <a href="https://s.click.taobao.com/PwWCMQw"><img src="http://img.alicdn.com/bao/uploaded/i2/2958654442/TB2YEO1rWSWBuNjSsrbXXa0mVXa_!!2958654442.jpg" alt="" style="height: 300px;width: 300px"></a>
                           </div>
                         </el-card>
                         <br><br>
+{#                        <el-card class="box-card">#}
+{#                          <div class="text item">#}
+{##}
+{#                              <a href="">热门文章</a>#}
+{##}
+{#                          </div>#}
+{#                        </el-card>#}
+{#                        <br><br>#}
+{#                        <el-card class="box-card">#}
+{#                          <div class="text item">#}
+{##}
+{#                              <a href="">xx</a>#}
+{##}
+{#                          </div>#}
+{#                        </el-card>#}
+{#                        <br><br>#}
                         <el-card class="box-card">
                           <div class="text item">
 
-                              <a href="">热门文章</a>
-
-                          </div>
-                        </el-card>
-                        <br><br>
-                        <el-card class="box-card">
-                          <div class="text item">
-
-                              <a href="">xx</a>
-
-                          </div>
-                        </el-card>
-                        <br><br>
-                        <el-card class="box-card">
-                          <div class="text item">
-
-                              <a href="">xx</a>
+                              <a href="">友情链接</a>
                               <br>
                                 {% for link in link_list %}
                                     <a href="{{ link.url }}">{{ link.title }}</a>
