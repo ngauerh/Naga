@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block webhead %}
+
+    <style>
+    ul,li{
+        list-style: none;
+
+    }
+    </style>
+{% endblock %}
+
+
+{% block webbody %}
+
+
+    {% regroup blog_list by create_at.year as dates_by_year %}
+
+    <ul>
+    {% for year in dates_by_year %}
+        <li>
+            <h3 style="color: grey">{{ year.grouper }}&nbsp;年&nbsp;:</h3>
+
+            {% regroup year.list by create_at.month as dates_by_month %}
+            <ul>
+                {% for month in dates_by_month %}
+                    <li>
+                        <h4 style="color: grey">{{ month.grouper }}&nbsp;月&nbsp;:</h4>
+                            <ul>
+                            {% for blog in month.list %}
+                                <li>
+                                    <a href="{% url 'details' blog.id %}" style="color: blue">{{ blog.title }}</a>
+                                    <br><br>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </li>
+    {% endfor %}
+    </ul>
+
+
+
+
+{% endblock %}
