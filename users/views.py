@@ -10,3 +10,10 @@ def aboutme(request):
     about = AboutMe.objects.all()
     context['about'] = about
     return render(request, 'about.html', context=context)
+
+
+def ziyu(request):
+    context = loadinfo()
+    ziyu = Ziyu.objects.all()
+    context['ziyu'] = ziyu
+    return render(request, 'ziyu.html', context=context)

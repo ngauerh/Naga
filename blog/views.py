@@ -7,6 +7,7 @@ from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from urllib.parse import urljoin
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
+from django.contrib.syndication.views import Feed
 
 
 # 公共的侧边栏信息
@@ -21,7 +22,7 @@ def loadinfo():
 def index(request):
     context = loadinfo()
     blog_list = Blog.objects.all()
-    paginator = Paginator(blog_list, 10)
+    paginator = Paginator(blog_list, 1)
 
     page = request.GET.get('page')
     if page:
@@ -114,14 +115,19 @@ class BlogAPI(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
 
 
+# RSS
+class RssFeed(Feed):
+    pass
+
+
 # 异常
 def page_not_found(request):
-    return render(request, '404.html')
+    return render(request, 'error/404.html')
 
 
 def page_error(request):
-    return render(request, '500.html')
+    return render(request, 'error/500.html')
 
 
 def permission_denied(request):
-    return render(request, '403.html')
+    return render(request, 'error/403.html')

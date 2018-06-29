@@ -54,6 +54,7 @@ class Message(models.Model):
     name = models.CharField('姓名', max_length=100)
     email = models.EmailField('邮箱', max_length=100)
     message = models.TextField('留言')
+    create_at = models.DateTimeField('评论时间', auto_now_add=True)  # 评论时间
 
     def __str__(self):
         return self.email

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block webhead %}
+
+
+{% endblock %}
+
+
+{% block webbody %}
+
+    {% for zy in ziyu %}
+
+
+
+
+    <el-card class="box-card">
+      <div class="text item">
+          <a href="" style="font-size: 20px;">{{ zy.title }}</a>
+          <br>
+          {{ zy.content|safe }}
+      </div>
+        <hr>
+        <span style="font-size: 12px">
+            <i class="el-icon-date"></i> &nbsp; {{ zy.create_at|date:"M d Y" }}
+        </span>
+        <span style="margin-right: 30px"></span>
+    </el-card>
+<br>
+
+    {% endfor %}
+
+
+
+{% endblock %}

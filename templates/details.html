@@ -17,11 +17,11 @@
 
 
 
-<h2>{{ blog_list.title }}</h2>
+<h2 style="text-align: center">{{ blog_list.title }}</h2>
 {#<span><i class="el-icon-edit"></i>{{ blog_list.author }}</span>#}
 <span style="color: grey">{{ blog_list.category }}</span>
     &nbsp;&nbsp;&nbsp;
-<span style="color: grey">{{ blog_list.create_at }}</span>
+<span style="color: grey; float: right"><i class="el-icon-date"></i> &nbsp;{{ blog_list.create_at|date:"M d Y" }}</span>
 
 
 
@@ -35,11 +35,12 @@
     <hr>
 
 {% for tag in tag_list %}
-    <el-tag type="success">
-
+    <a href="{% url 'blogtags' %}?tid={{ tag.id }}">
+    <el-button type="warning" round>
         {{ tag }}
+    </el-button>
+    </a>
 
-    </el-tag>
     {% endfor %}
 
     <br><br>
@@ -74,9 +75,13 @@
 
 {% for message in message_list %}
     <el-card class="box-card">
-        {{ message.name }}
-        <br>
-    {{ message.message }}
+        <span style="font-size: 12px;color: grey">{{ message.name }}</span>
+        <span style="font-size: 12px; float: right; color: grey">{{ message.create_at }}</span>
+        <br><br>
+        <span>
+            {{ message.message }}
+        </span>
+
     </el-card>
     <br>
 {% endfor %}

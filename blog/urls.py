@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^b/', include(extra_pattern)),
     url(r'^api/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'feed/', RssFeed, name="RSS")
 ]
