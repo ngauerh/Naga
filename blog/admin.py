@@ -28,5 +28,10 @@ class FriendlyLinkAdmin(admin.ModelAdmin):
     list_display = ('title', 'url')
 
 
+@admin.register(Siteinfo)
+class SiteinfoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'icon', 'pagesnum')
+
+
 admin.site.register(Tag)
 admin.site.register(Category)

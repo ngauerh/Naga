@@ -14,7 +14,9 @@ from django.contrib.syndication.views import Feed
 def loadinfo():
     context = {}
     link = FriendlyLink.objects.all()
+    info = Siteinfo.objects.first()
     context['link_list'] = link
+    context['info'] = info
     return context
 
 
@@ -22,7 +24,7 @@ def loadinfo():
 def index(request):
     context = loadinfo()
     blog_list = Blog.objects.all()
-    paginator = Paginator(blog_list, 1)
+    paginator = Paginator(blog_list, context['info'].pagesnum)
 
     page = request.GET.get('page')
     if page:

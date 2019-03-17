@@ -65,7 +65,7 @@ class Message(models.Model):
 
 
 class FriendlyLink(models.Model):
-    id = id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField('标题', max_length=30)
     url = models.URLField('链接')
     message = models.TextField('备注', blank=True)
@@ -77,4 +77,14 @@ class FriendlyLink(models.Model):
     class Meta:
         verbose_name = '友情链接'
         verbose_name_plural = '友情链接'
+
+
+class Siteinfo(models.Model):
+    title = models.CharField('网站标题', max_length=30)
+    icon = models.ImageField('网站图标', upload_to='icon')
+    pagesnum = models.IntegerField('一页文章数', default=8)
+
+    class Meta:
+        verbose_name = '网站信息'
+        verbose_name_plural = '网站信息'
 

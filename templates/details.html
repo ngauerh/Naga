@@ -3,12 +3,14 @@
 
 
 {% block webhead %}
+    <link href="{{ info.icon }}" rel="icon" type="image/x-icon">
     <meta name="title" content="{{ blog_list.title }}">
     <meta name="Author" content="{{ blog_list.author }}的网络日志 博客">
     <meta name="Description" content="{{ blog_list.summary }}, {{ blog_list.title }}">
     <meta name="Keywords" content="{{ blog_list.tags }}, {{ blog_list.category }}">
 
     <title>{{ blog_list.title }}</title>
+
 
 {% endblock %}
 

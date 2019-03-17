@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon">
+    <link href="media/{{ info.icon }}" rel="icon" type="image/x-icon">
     {% block webhead %}
 
     {% endblock %}
@@ -41,7 +41,7 @@
 
           <el-header>
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-              <el-menu-item index="5"><a href="{% url "index" %}" style="font-size: 25px; font-family: 'Courier New', Monospace" >胡言乱语的日志</a></el-menu-item>
+              <el-menu-item index="5"><a href="{% url "index" %}" style="font-size: 25px; font-family: 'Courier New', Monospace" >{{ info.title }}</a></el-menu-item>
               <el-menu-item index="2"><a href="{% url 'archives' %}">归档</a></el-menu-item>
               <el-menu-item index="3"><a href="{% url 'categories' %}">分类</a></el-menu-item>
               <el-menu-item index="4"><a href="{% url 'tags' %}">标签</a></el-menu-item>
