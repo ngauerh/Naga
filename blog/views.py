@@ -24,7 +24,10 @@ def loadinfo():
 def index(request):
     context = loadinfo()
     blog_list = Blog.objects.all()
-    paginator = Paginator(blog_list, context['info'].pagesnum)
+    try:
+        paginator = Paginator(blog_list, context['info'].pagesnum)
+    except AttributeError:
+        paginator = Paginator(blog_list, 8)
 
     page = request.GET.get('page')
     if page:

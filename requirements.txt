@@ -1,4 +1,4 @@
-Django==1.11.11
+Django==1.11.20
 django-ckeditor==5.4.0
 django-debug-toolbar==1.9.1
 django-js-asset==1.1.0

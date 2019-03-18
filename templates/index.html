@@ -49,18 +49,29 @@
 <br>
 {% endfor %}
 
+{% if cus_list.previous_page_number > 0 %}
 
+<el-button  round>
+        <a href="?page={{ cus_list.previous_page_number }}"><span aria-hidden="true"><i class="el-icon-d-arrow-left"></i></span></a>
+</el-button>
+
+{% endif %}
 
 
 {#分页#}
 {% for pg in cus_list.paginator.page_range %}
     {% if cus_list.number == pg %}
-        <el-button  round><a href="?page={{ pg }}">{{ pg }}</a></el-button>
+        <el-button type="info" round><a href="?page={{ pg }}">{{ pg }}</a></el-button>
 
-    {% else %}
+
+    {##}
+
+    {% elif pg < cus_list.number|add:3 and pg > cus_list.number|add:-3 %}
         <el-button  round><a href="?page={{ pg }}">{{ pg }}</a></el-button>
 
     {% endif %}
+
+
 {% endfor %}
 
 {% if cus_list.has_next %}
