@@ -9,13 +9,8 @@
 
 {% block webbody %}
 
-{% for foo in about %}
-    {{ foo.content|safe }}
-{% endfor %}
 
-
-
-
+    {{ about.content|safe }}
 
 
 {% endblock %}

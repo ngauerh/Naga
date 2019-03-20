@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from users.models import AboutMe
 from rest_framework import viewsets
 from .serializers import BlogSerializer
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
@@ -17,6 +18,8 @@ def loadinfo():
     info = Siteinfo.objects.first()
     context['link_list'] = link
     context['info'] = info
+    a = AboutMe.objects.first()
+    context['about'] = a
     return context
 
 
@@ -44,10 +47,6 @@ def index(request):
     context['cus_list'] = customer
     context['blog_list'] = b_list
 
-    # 自我简介
-    from users.models import AboutMe
-    a = AboutMe.objects.all()
-    context['about'] = a
     return render(request, 'index.html', context)
 
 
@@ -94,6 +93,8 @@ def archives(request):
     dates = Blog.objects.datetimes('create_at', 'month', order='DESC')
     context['dates'] = dates
     blog_list = Blog.objects.all().order_by('-create_at')
+    total = Blog.objects.all().count()
+    context['total'] = total
     context['blog_list'] = blog_list
     return render(request, 'archives.html', context=context)
 

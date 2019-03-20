@@ -1,0 +1,71 @@
+{% load static from staticfiles %}
+                        <el-card class="box-card">
+                          <div class="text item">
+                              <a href="{% url 'aboutme' %}">关于作者</a>
+                              <div style="text-align: center">
+                                  <img src="/media/{{ about.avatar }}" alt="{{ info.title }}" style="height: 100px;width: 100px">
+                              </div>
+                              <div style="font-size: 14px">
+                                  {{ about.summary |safe }}
+                              </div>
+                              <div>
+                                  {% if about.weibo %}
+                                        <a href="{{ about.weibo }}" target="_blank"><img src="{% static '/icon/weibo.png' %}" alt=""></a>
+                                  {% endif %}
+                                  {% if about.twitter %}
+                                        <a href="{{ about.twitter }}" target="_blank"><img src="{% static '/icon/twitter.png' %}" alt=""></a>
+                                  {% endif %}
+                                  {% if about.github %}
+                                        <a href="{{ about.github }}" target="_blank"><img src="{% static '/icon/github.png' %}" alt=""></a>
+                                  {% endif %}
+                                  {% if about.zhihu %}
+                                        <a href="{{ about.zhihu }}" target="_blank"><img src="{% static '/icon/zhihu.png' %}" alt=""></a>
+                                  {% endif %}
+                                  {% if about.gmail %}
+                                        <a href="{{ about.gmail }}" target="_blank"><img src="{% static '/icon/gmail.png' %}" alt=""></a>
+                                  {% endif %}
+                                  {% if about.stackoverflow %}
+                                        <a href="{{ about.stackoverflow }}" target="_blank"><img src="{% static '/icon/stackoverflow.png' %}" alt=""></a>
+                                  {% endif %}
+                              </div>
+                          </div>
+                        </el-card>
+                        <br><br>
+                        <el-card class="box-card">
+                          <div class="text item">
+
+                              <a href="">标签云</a>
+                          </div>
+                        </el-card>
+                        <br><br>
+{#                        <el-card class="box-card">#}
+{#                          <div class="text item">#}
+{##}
+{#                              <a href="">热门文章</a>#}
+{##}
+{#                          </div>#}
+{#                        </el-card>#}
+{#                        <br><br>#}
+{#                        <el-card class="box-card">#}
+{#                          <div class="text item">#}
+{##}
+{#                              <a href="">xx</a>#}
+{##}
+{#                          </div>#}
+{#                        </el-card>#}
+{#                        <br><br>#}
+                        <el-card class="box-card">
+                          <div class="text item">
+
+                          <h4 style="color: grey">友情链接</h4>
+                            <ul>
+                            {% for link in link_list %}
+                                <li style="color: #bbb">
+                                    <a href="{{ link.url }}" style="color: grey">{{ link.title }}</a></li>
+                                    <br>
+                                </li>
+                            {% endfor %}
+                            </ul>
+
+                          </div>
+                        </el-card>

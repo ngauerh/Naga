@@ -8,16 +8,17 @@
 
 
 {% block webbody %}
-
+&nbsp;
     {% for zy in ziyu %}
-
-
-
 
     <el-card class="box-card">
       <div class="text item">
-          <a href="" style="font-size: 20px;">{{ zy.title }}</a>
+          {% if zy.title %}
+
+          <span style="font-size: 20px;">{{ zy.title }}</span>
           <br>
+
+          {% endif %}
           {{ zy.content|safe }}
       </div>
         <hr>
@@ -26,9 +27,9 @@
         </span>
         <span style="margin-right: 30px"></span>
     </el-card>
-<br>
+    <br>
 
-    {% endfor %}
+{% endfor %}
 
 
 

@@ -13,7 +13,7 @@
 
 
 {% block webbody %}
-
+<h4 style="color: grey">嗯..! 目前共计 {{ total }} 篇文章。 继续努力。</h4>
 
     {% regroup blog_list by create_at.year as dates_by_year %}
 
@@ -30,8 +30,9 @@
                             <ul>
                             {% for blog in month.list %}
                                 <li>
-                                    <a href="{% url 'details' blog.id %}" style="color: blue">{{ blog.title }}</a>
-                                    <br><br>
+                                    <span style="line-height: 2px; color: #bbb;font-size: 14px">{{ blog.create_at|date:"m-d" }}</span><span>&nbsp;&nbsp;&nbsp;</span><a href="{% url 'details' blog.id %}" style="color: blue">{{ blog.title }}</a>
+                                    <hr style=" height:2px;border:none;border-top:2px dotted #bbb;" />
+                                    <br>
                                 </li>
                             {% endfor %}
                             </ul>

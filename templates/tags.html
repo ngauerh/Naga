@@ -11,19 +11,13 @@
 
     {% for tag in tag_list %}
 
-
-        <a href="{% url 'blogtags' %}?tid={{ tag.id }}"><el-tag type="success" style="font-size: 16px">{{ tag.tag }}</el-tag></a>
+        <a href="{% url 'blogtags' %}?tid={{ tag.id }}"><el-button type="success" round style="font-size: 16px;margin-bottom: 10px">{{ tag.tag }}</el-button></a>
 
     {% endfor %}
 
 
     {% for ca in ca_list %}
-        <a href="{% url 'blogtags' %}?tid={{ ca.id }}"><el-tag type="success" style="font-size: 16px">{{ ca.category }}</el-tag></a>
+        <a href="{% url 'blogtags' %}?tid={{ ca.id }}"><el-button type="info" round style="font-size: 16px;margin-bottom: 10px">{{ ca.category }}</el-button></a>
     {% endfor %}
-
-
-
-
-
 
 {% endblock %}

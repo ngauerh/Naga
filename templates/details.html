@@ -20,7 +20,6 @@
 
 
 <h2 style="text-align: center">{{ blog_list.title }}</h2>
-{#<span><i class="el-icon-edit"></i>{{ blog_list.author }}</span>#}
 <span style="color: grey">{{ blog_list.category }}</span>
     &nbsp;&nbsp;&nbsp;
 <span style="color: grey; float: right"><i class="el-icon-date"></i> &nbsp;{{ blog_list.create_at|date:"M d Y" }}</span>
@@ -38,12 +37,12 @@
 
 {% for tag in tag_list %}
     <a href="{% url 'blogtags' %}?tid={{ tag.id }}">
-    <el-button type="warning" round>
+    <el-button type="info" round>
         {{ tag }}
     </el-button>
     </a>
 
-    {% endfor %}
+{% endfor %}
 
     <br><br>
 
@@ -53,16 +52,16 @@
 
         <el-form ref="form"  action="{% url 'comment' %}" method="post">
         {% csrf_token %}
-            <el-input v-model="input" placeholder="请输入您的名字" name="username"></el-input>
+            <el-input v-model="input_name" placeholder="请输入您的名字" name="username"></el-input>
         <br><br>
-        <el-input v-model="input" placeholder="请输入您的邮箱" name="email"></el-input>
+        <el-input v-model="input_email" placeholder="请输入您的邮箱" name="email"></el-input>
         <br><br>
         <el-input
           type="textarea"
           :rows="6"
           placeholder="请输入您的评论"
           name="message"
-          v-model="textarea">
+          v-model="textarea_m">
         </el-input>
             <input type="hidden" name="bid" value="{{ blog_list.id }}">
             <br><br>
@@ -72,6 +71,7 @@
 
   </el-collapse-item>
 </el-collapse>
+
 
     <br>
 
