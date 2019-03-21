@@ -21,8 +21,8 @@
                                   {% if about.zhihu %}
                                         <a href="{{ about.zhihu }}" target="_blank"><img src="{% static '/icon/zhihu.png' %}" alt=""></a>
                                   {% endif %}
-                                  {% if about.gmail %}
-                                        <a href="{{ about.gmail }}" target="_blank"><img src="{% static '/icon/gmail.png' %}" alt=""></a>
+                                  {% if about.email %}
+                                        <a href="mailto: {{ about.email }}" target="_blank"><img src="{% static '/icon/gmail.png' %}" alt=""></a>
                                   {% endif %}
                                   {% if about.stackoverflow %}
                                         <a href="{{ about.stackoverflow }}" target="_blank"><img src="{% static '/icon/stackoverflow.png' %}" alt=""></a>

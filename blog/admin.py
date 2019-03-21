@@ -12,10 +12,10 @@ admin.site.site_title = "后台管理系统"
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'create_at', 'category')
-    search_fields = ('title', 'author', "category__category")
+    list_display = ('title', 'author', 'create_at', 'category', 'topped')
+    search_fields = ('title', 'author', "category__category", 'topped')
     filter_horizontal = ('tags',)
-    list_filter = ('tags', 'category', 'author')
+    list_filter = ('category', 'author', 'topped', 'tags')
 
 
 @admin.register(Message)

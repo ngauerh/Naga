@@ -9,6 +9,7 @@ from urllib.parse import urljoin
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.syndication.views import Feed
+import json
 
 
 # 公共的侧边栏信息
@@ -44,6 +45,10 @@ def index(request):
     except EmptyPage:
         customer = paginator.page(paginator.num_pages)
 
+    commend = Blog.objects.filter(topped=True).all().values('title', 'id')
+    commend = list(commend)
+    print(commend)
+    context['commend_list'] = commend
     context['cus_list'] = customer
     context['blog_list'] = b_list
 
@@ -96,7 +101,7 @@ def archives(request):
     total = Blog.objects.all().count()
     context['total'] = total
     context['blog_list'] = blog_list
-    return render(request, 'archives.html', context=context)
+    return render(request, 'archives_2.html', context=context)
 
 
 # 评论
