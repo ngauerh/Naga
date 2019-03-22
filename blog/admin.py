@@ -33,5 +33,10 @@ class SiteinfoAdmin(admin.ModelAdmin):
     list_display = ('title', 'icon', 'pagesnum')
 
 
+@admin.register(Adsense)
+class AdsenseinfoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'img', 'url')
+
+
 admin.site.register(Tag)
 admin.site.register(Category)

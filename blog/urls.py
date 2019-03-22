@@ -5,11 +5,6 @@ router = routers.DefaultRouter()
 router.register(r'blog', BlogAPI)
 
 
-
-handler403 = permission_denied
-handler404 = page_not_found
-handler500 = page_error
-
 extra_pattern = [
     url(r'^details/(?P<bid>[0-9]+)$', blog_details, name='details'),
     url(r'^tags$', tags, name='tags'),

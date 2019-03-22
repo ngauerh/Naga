@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-
+from blog.views import page_not_found, permission_denied, page_error
 try:
     from .settings import NAGA_ADMIN_PATH
 except ImportError:
@@ -29,6 +29,9 @@ if len(NAGA_ADMIN_PATH) != 0:
 else:
     admin_prefix = r'^%s/' % 'admin'
 
+handler403 = permission_denied
+handler404 = page_not_found
+handler500 = page_error
 
 urlpatterns = [
     url(admin_prefix, admin.site.urls),

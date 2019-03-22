@@ -33,27 +33,43 @@
                         <br><br>
                         <el-card class="box-card">
                           <div class="text item">
+                              <a href="">标签云</a><br>
+                              {% for foo in tag_yun %}
+                                  {% if foo.num_post > 0 %}
+                                      {% if foo.num_post <= 10 %}
+                                        <font style="font-size:{{ foo.num_post|add:20 }}px;"><a href="{% url 'blogtags' %}?tid={{ tag.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
+                                      {% elif foo.num_post > 20 %}
+                                        <font style="font-size:{{ foo.num_post|add:30 }}px;"><a href="{% url 'blogtags' %}?tid={{ tag.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
+                                      {% elif foo.num_post > 30 %}
+                                        <font style="font-size:60px;"><a href="{% url 'blogtags' %}?tid={{ tag.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
+                                      {% endif %}
+                                  {% endif %}
 
-                              <a href="">标签云</a>
+                              {% endfor %}
+
                           </div>
                         </el-card>
                         <br><br>
-{#                        <el-card class="box-card">#}
-{#                          <div class="text item">#}
-{##}
-{#                              <a href="">热门文章</a>#}
-{##}
-{#                          </div>#}
-{#                        </el-card>#}
-{#                        <br><br>#}
-{#                        <el-card class="box-card">#}
-{#                          <div class="text item">#}
-{##}
-{#                              <a href="">xx</a>#}
-{##}
-{#                          </div>#}
-{#                        </el-card>#}
-{#                        <br><br>#}
+                        <el-card class="box-card">
+                        {% if ad_list %}
+                             {% for foo in ad_list %}
+                                 <div style="position:relative;">
+                                     <a href="{{ foo.url }}"><img src="/media/{{ foo.img }}" alt="" style="height: 100%;width: 100%"></a>
+                                     <div style="position:absolute; z-index:2; left:10px; bottom:20px; color: #FFFFFF"><a href="{{ foo.url }}">{{ foo.title }}</a></div>
+                                 </div>
+                                <br>
+                             {% endfor %}
+                        {% else %}
+                            <div style="position:relative;">
+                            　　<a href="https://www.vultr.com/?ref=7788287"><img src="/media/tu/vultr.jpg" alt="" style="height: 100%;width: 100%"></a>
+                                <div style="position:absolute; z-index:2; left:10px; bottom:20px; color: #FFFFFF"><a href="https://www.vultr.com/?ref=7788287">vultr 境外vps 可SS，每月仅需$3.5</a></div>
+                            </div>
+                            <br>
+                            <a href="https://cloud.tencent.com/redirect.php?redirect=1036&cps_key=0d9335e9885e6daf3baac60c53b18e41&from=console"><img src="/media/tu/tengxun.jpg" alt="" style="height: 100%;width: 100%" ></a>
+                            <br>
+                        {% endif %}
+                        </el-card>
+                        <br><br>
                         <el-card class="box-card">
                           <div class="text item">
 

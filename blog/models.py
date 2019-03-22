@@ -89,3 +89,13 @@ class Siteinfo(models.Model):
         verbose_name = '网站信息'
         verbose_name_plural = '网站信息'
 
+
+class Adsense(models.Model):
+    img = models.ImageField('推广图片', upload_to='tu')
+    title = models.TextField('推广文案', blank=True)
+    url = models.URLField('推广链接')
+
+    class Meta:
+        verbose_name = '推广素材'
+        verbose_name_plural = '推广素材'
+

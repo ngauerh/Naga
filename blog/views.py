@@ -9,6 +9,7 @@ from urllib.parse import urljoin
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.syndication.views import Feed
+from django.db.models.aggregates import Count
 import json
 
 
@@ -21,6 +22,10 @@ def loadinfo():
     context['info'] = info
     a = AboutMe.objects.first()
     context['about'] = a
+    tag_yun = Tag.objects.annotate(num_post=Count('blog'))
+    context['tag_yun'] = tag_yun
+    adsense = Adsense.objects.all()
+    context['ad_list'] = adsense
     return context
 
 
@@ -47,7 +52,6 @@ def index(request):
 
     commend = Blog.objects.filter(topped=True).all().values('title', 'id')
     commend = list(commend)
-    print(commend)
     context['commend_list'] = commend
     context['cus_list'] = customer
     context['blog_list'] = b_list
@@ -58,26 +62,29 @@ def index(request):
 # 详情页
 def blog_details(request, bid):
     context = loadinfo()
-    blog = Blog.objects.get(id=bid)
-    context['blog_list'] = blog
-    message = Message.objects.filter(mid=int(bid)).order_by('-pk')
-    context['message_list'] = message
-    tag = blog.tags.all()
-    context['tag_list'] = tag
+    try:
+        blog = Blog.objects.get(id=bid)
+        context['blog_list'] = blog
+        message = Message.objects.filter(mid=int(bid)).order_by('-pk')
+        context['message_list'] = message
+        tag = blog.tags.all()
+        context['tag_list'] = tag
 
-    response = render(request, 'details.html', context)
+        response = render(request, 'details.html', context)
 
-    if not request.COOKIES.get('blog_{}_readed'.format(str(bid))):
-        blog.views += 1
-        blog.save()
-        response.set_cookie('blog_{}_readed'.format(str(bid)), 'read', max_age=600)
-    return response
+        if not request.COOKIES.get('blog_{}_readed'.format(str(bid))):
+            blog.views += 1
+            blog.save()
+            response.set_cookie('blog_{}_readed'.format(str(bid)), 'read', max_age=600)
+        return response
+    except:
+        return redirect('/')
 
 
 # 标签页
 def tags(request):
     context = loadinfo()
-    tag = Tag.objects.all()
+    tag = Tag.objects.annotate(num_post=Count('blog'))
     context['tag_list'] = tag
     return render(request, 'tags.html', context=context)
 
@@ -94,7 +101,7 @@ def blogtags(request):
 # 分类页
 def categories(request):
     context = loadinfo()
-    category = Category.objects.all()
+    category = Category.objects.annotate(num_post=Count('blog'))
     context['ca_list'] = category
     return render(request, 'tags.html', context=context)
 
