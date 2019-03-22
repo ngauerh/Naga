@@ -74,6 +74,12 @@
         <span style="font-size: 12px">
             <i class="el-icon-edit"></i> &nbsp; {{ blog.author }}
         </span>
+        <span style="margin-right: 30px"></span>
+        {% ifnotequal blog.views 0 %}
+        <span style="font-size: 12px">
+            <i class="el-icon-view"></i> &nbsp; {{ blog.views }}
+        </span>
+        {% endifnotequal %}
         <span style="font-size: 12px; float: right">
             <a href="{% url "details" blog.id %}" style="color: #CCCCFF">阅读更多>></a>
         </span>

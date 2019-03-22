@@ -64,7 +64,14 @@ def blog_details(request, bid):
     context['message_list'] = message
     tag = blog.tags.all()
     context['tag_list'] = tag
-    return render(request, 'details.html', context)
+
+    response = render(request, 'details.html', context)
+
+    if not request.COOKIES.get('blog_{}_readed'.format(str(bid))):
+        blog.views += 1
+        blog.save()
+        response.set_cookie('blog_{}_readed'.format(str(bid)), 'read', max_age=600)
+    return response
 
 
 # 标签页
@@ -101,7 +108,7 @@ def archives(request):
     total = Blog.objects.all().count()
     context['total'] = total
     context['blog_list'] = blog_list
-    return render(request, 'archives_2.html', context=context)
+    return render(request, 'archives.html', context=context)
 
 
 # 评论

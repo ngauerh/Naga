@@ -3,48 +3,25 @@
 
 {% block webhead %}
 
-    <style>
-    ul,li{
-        list-style: none;
-
-    }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ info.title }} 归档</title>
 {% endblock %}
 
-
 {% block webbody %}
+
 <h4 style="color: grey">嗯..! 目前共计 {{ total }} 篇文章。 继续努力。</h4>
-
-    {% regroup blog_list by create_at.year as dates_by_year %}
-
-    <ul>
-    {% for year in dates_by_year %}
-        <li>
-            <h3 style="color: grey">{{ year.grouper }}&nbsp;年&nbsp;:</h3>
-
-            {% regroup year.list by create_at.month as dates_by_month %}
-            <ul>
-                {% for month in dates_by_month %}
-                    <li>
-                        <h4 style="color: grey">{{ month.grouper }}&nbsp;月&nbsp;:</h4>
-                            <ul>
-                            {% for blog in month.list %}
-                                <li>
-                                    <span style="line-height: 2px; color: #bbb;font-size: 14px">{{ blog.create_at|date:"m-d" }}</span><span>&nbsp;&nbsp;&nbsp;</span><a href="{% url 'details' blog.id %}" style="color: blue">{{ blog.title }}</a>
-                                    <hr style=" height:2px;border:none;border-top:2px dotted #bbb;" />
-                                    <br>
-                                </li>
-                            {% endfor %}
-                            </ul>
-                    </li>
-                {% endfor %}
-            </ul>
-
-        </li>
-    {% endfor %}
-    </ul>
-
-
-
-
+<div class="block">
+  <el-timeline>
+      {% for blog in blog_list %}
+        <el-timeline-item timestamp="{{ blog.create_at }}" placement="top">
+          <el-card>
+              <a href="{% url 'details' blog.id %}"><h4>{{ blog.title }}</h4></a>
+          </el-card>
+        </el-timeline-item>
+      {% endfor %}
+  </el-timeline>
+</div>
 {% endblock %}

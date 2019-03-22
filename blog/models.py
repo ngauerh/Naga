@@ -35,6 +35,7 @@ class Blog(models.Model):
     category = models.ForeignKey(Category, verbose_name='分类', max_length=100, blank=True)
     summary = RichTextUploadingField('摘要')  # 摘要
     content = RichTextUploadingField('正文')  # 正文
+    views = models.IntegerField('阅读量', default=0)  # 阅读量
     create_at = models.DateTimeField('发布时间')  # 发布时间
     update_at = models.DateTimeField('更新时间')  # 更新时间
     topped = models.BooleanField('置顶', default=False)  # 是否置顶

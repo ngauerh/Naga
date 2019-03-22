@@ -109,6 +109,7 @@ venv.bak/
 # media图片
 media/ckeditor_images
 media/icon
+media/avatar
 
 blog/migrations/
 users/migrations/

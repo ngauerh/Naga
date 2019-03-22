@@ -20,11 +20,17 @@
 
 
 <h2 style="text-align: center">{{ blog_list.title }}</h2>
-<span style="color: grey">{{ blog_list.category }}</span>
+<div style="text-align: center">
+    <span style="color: grey">分类：</span><span style="color: grey">{{ blog_list.category }}</span>
+        &nbsp;&nbsp;&nbsp;
+    {% ifnotequal blog_list.views 0 %}
+        <span style="font-size: 14px;color: grey">
+            <i class="el-icon-view"></i>&nbsp;{{ blog_list.views }} 次阅读
+        </span>
+    {% endifnotequal %}
     &nbsp;&nbsp;&nbsp;
-<span style="color: grey; float: right"><i class="el-icon-date"></i> &nbsp;{{ blog_list.create_at|date:"M d Y" }}</span>
-
-
+    <span style="color: grey;"><i class="el-icon-date"></i> &nbsp;{{ blog_list.create_at|date:"M d Y" }}</span>
+</div>
 
 
     <hr>
