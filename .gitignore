@@ -111,5 +111,6 @@ media/ckeditor_images
 media/icon
 media/avatar
 
+# migrations
 blog/migrations/
 users/migrations/
