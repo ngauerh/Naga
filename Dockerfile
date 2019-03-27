@@ -21,6 +21,7 @@ RUN apt-get update \
         python-setuptools\
         git\
         nginx\
+        supervisor\
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -29,10 +30,19 @@ RUN curl -s https://bootstrap.pypa.io/get-pip.py | python
 RUN curl -s https://bootstrap.pypa.io/get-pip.py | python3
 
 
+# nginx 配置
+COPY . /root/Naga/
+COPY conf/naga.conf /etc/nginx/conf.d/
+COPY conf/supervisord.conf /etc/supervisor/conf.d/
+
 # 安装依赖
 RUN pip3 install uwsgi
-ADD ./requirements.txt /root/
-RUN pip3 install -r /root/requirements.txt
+RUN pip3 install -r /root/Naga/requirements.txt
+
+
+# 暴露端口
+EXPOSE 8000
+
 
 
 
