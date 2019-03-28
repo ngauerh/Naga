@@ -1,4 +1,15 @@
 # Django+element ui的博客程序
+python3
+Django 1.11
+Sqlite3
+Element ui
+
+## 3/28新增Docker一键部署
+<pre>
+chmod 777 start.sh
+./start.sh
+</pre>
+
 
 ## 运行截图
 ![](https://i.imgur.com/omVoltq.png)
