@@ -31,13 +31,13 @@ RUN curl -s https://bootstrap.pypa.io/get-pip.py | python3
 
 
 # nginx 配置
-COPY . /root/Naga/
+COPY . /home/www-data/Naga/
 COPY conf/naga.conf /etc/nginx/conf.d/
-COPY conf/supervisord.conf /etc/supervisor/conf.d/
+COPY conf/s_naga.conf /etc/supervisor/conf.d/
 
 # 安装依赖
 RUN pip3 install uwsgi
-RUN pip3 install -r /root/Naga/requirements.txt
+RUN pip3 install -r /home/www-data/Naga/requirements.txt
 
 
 # 暴露端口
