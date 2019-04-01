@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'blog',
     'users',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'haystack',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
@@ -163,3 +164,17 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join(['codesnippet', 'uploadimage', 'widget', 'lineutils']),
     }
 }
+
+
+# 配置全文搜索
+# 指定搜索引擎
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+# 指定如何对搜索结果分页，这里设置为每 10 项结果为一页，默认是 20 项为一页
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+# 添加此项，当数据库改变时，会自动更新索引，非常方便
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
