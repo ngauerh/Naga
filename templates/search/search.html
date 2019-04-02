@@ -1,25 +1,86 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <title></title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% if query %}#}
+{#    <h3>搜索结果如下：</h3>#}
+{#    {% for result in page.object_list %}#}
+{#        <a href="{% url "details" result.object.id %}">{{ result.object.title }}</a><br/>#}
+{#    {% empty %}#}
+{#        <p>啥也没找到</p>#}
+{#    {% endfor %}#}
+{##}
+{#    {% if page.has_previous or page.has_next %}#}
+{#        <div>#}
+{#            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 上一页{% if page.has_previous %}</a>{% endif %}#}
+{#        |#}
+{#            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}下一页 &raquo;{% if page.has_next %}</a>{% endif %}#}
+{#        </div>#}
+{#    {% endif %}#}
+{#{% endif %}#}
+{#</body>#}
+{#</html>#}
 
-{% if query %}
-    <h3>搜索结果如下：</h3>
-    {% for result in page.object_list %}
-        <a href="{% url "details" result.object.id %}">{{ result.object.title }}</a><br/>
-    {% empty %}
-        <p>啥也没找到</p>
-    {% endfor %}
+{% extends "base.html" %}
+{% load highlight %}
+{% load static from staticfiles %}
 
-    {% if page.has_previous or page.has_next %}
+{% block webhead %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ info.title }}</title>
+    <style>
+           .keyword{
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block webbody %}
+    {% if query %}
+        {% for result in page.object_list %}
+            <el-card class="box-card">
+              <div class="text item">
+                  <a href="{% url "details" result.object.id %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ result.object.title }}</a>
+
+                  <br><br>
+
+                  {% highlight result.object.content with query css_class "keyword" %}
+              </div>
+                <hr>
+                <span style="font-size: 12px">
+                    <i class="el-icon-date"></i> &nbsp; {{result.object.create_at|date:"M d Y" }}
+                </span>
+                <span style="margin-right: 30px"></span>
+                <span style="font-size: 12px">
+                    <i class="el-icon-edit"></i> &nbsp; {{ result.object.author }}
+                </span>
+                <span style="margin-right: 30px"></span>
+                {% ifnotequal result.object.views 0 %}
+                <span style="font-size: 12px">
+                    <i class="el-icon-view"></i> &nbsp; {{ result.object.views }}
+                </span>
+                {% endifnotequal %}
+                <span style="font-size: 12px; float: right">
+                    <a href="{% url "details" result.object.id %}" style="color: #CCCCFF">阅读更多>></a>
+                </span>
+            </el-card>
+        <br>
+        {% empty %}
+            <p>什么也没找到。。。。。即将回到主页</p>
+        {% endfor %}
+
+        {% if page.has_previous or page.has_next %}
         <div>
-            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 上一页{% if page.has_previous %}</a>{% endif %}
+            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}<el-button round>上一页</el-button>{% if page.has_previous %}</a>{% endif %}
         |
-            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}下一页 &raquo;{% if page.has_next %}</a>{% endif %}
+            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}<el-button round>下一页</el-button>{% if page.has_next %}</a>{% endif %}
         </div>
+        {% endif %}
     {% endif %}
-{% endif %}
-</body>
-</html>
+{% endblock %}

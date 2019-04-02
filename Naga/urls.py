@@ -39,7 +39,6 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^u/', include('users.urls')),
     url(r'^', include('blog.urls')),
-    url(r'^search/', include('haystack.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

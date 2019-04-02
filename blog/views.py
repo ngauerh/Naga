@@ -10,6 +10,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.syndication.views import Feed
 from django.db.models.aggregates import Count
+from haystack.views import SearchView
 import json
 
 
@@ -143,6 +144,25 @@ class BlogAPI(viewsets.ModelViewSet):
 # RSS
 class RssFeed(Feed):
     pass
+
+
+class QSearchView(SearchView):
+    def extra_context(self):       # 重载extra_context来添加额外的context内容
+        context = super(QSearchView, self).extra_context()
+        link = FriendlyLink.objects.all()
+        info = Siteinfo.objects.first()
+        context['link_list'] = link
+        context['info'] = info
+        a = AboutMe.objects.first()
+        context['about'] = a
+        tag_yun = Tag.objects.annotate(num_post=Count('blog'))
+        context['tag_yun'] = tag_yun
+        adsense = Adsense.objects.all()
+        context['ad_list'] = adsense
+        return context
+
+
+
 
 
 # 异常

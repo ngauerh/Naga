@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^b/', include(extra_pattern)),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'feed/', RssFeed, name="RSS")
+    url(r'feed/', RssFeed, name="RSS"),
+    url(r'^search/', QSearchView(), name='haystack_search'),
 ]

@@ -175,6 +175,6 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 # 指定如何对搜索结果分页，这里设置为每 10 项结果为一页，默认是 20 项为一页
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
 # 添加此项，当数据库改变时，会自动更新索引，非常方便
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
