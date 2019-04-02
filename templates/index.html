@@ -62,7 +62,7 @@
 {% for blog in blog_list %}
     <el-card class="box-card">
       <div class="text item">
-          <a href="{% url "details" blog.id %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ blog.title }}</a>
+          <a href="{% url "blog:details" blog.id %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ blog.title }}</a>
           <br>
           {{ blog.summary|safe }}
       </div>
@@ -81,7 +81,7 @@
         </span>
         {% endifnotequal %}
         <span style="font-size: 12px; float: right">
-            <a href="{% url "details" blog.id %}" style="color: #CCCCFF">阅读更多>></a>
+            <a href="{% url "blog:details" blog.id %}" style="color: #CCCCFF">阅读更多>></a>
         </span>
     </el-card>
 <br>

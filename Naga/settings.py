@@ -141,6 +141,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # 后台路径设置
 NAGA_ADMIN_PATH = "admin"
 
+# 网站路径
+NAGA_WEB_URL = 'http://192.168.228.129:8000'
+
+
+
 
 # 富文本编辑器设置
 CKEDITOR_UPLOAD_PATH = 'ckeditor_images'

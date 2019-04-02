@@ -46,7 +46,7 @@
         {% for result in page.object_list %}
             <el-card class="box-card">
               <div class="text item">
-                  <a href="{% url "details" result.object.id %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ result.object.title }}</a>
+                  <a href="{% url "blog:details" result.object.id %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ result.object.title }}</a>
 
                   <br><br>
 
@@ -67,7 +67,7 @@
                 </span>
                 {% endifnotequal %}
                 <span style="font-size: 12px; float: right">
-                    <a href="{% url "details" result.object.id %}" style="color: #CCCCFF">阅读更多>></a>
+                    <a href="{% url "blog:details" result.object.id %}" style="color: #CCCCFF">阅读更多>></a>
                 </span>
             </el-card>
         <br>

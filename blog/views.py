@@ -11,6 +11,8 @@ from django.http import HttpResponse
 from django.contrib.syndication.views import Feed
 from django.db.models.aggregates import Count
 from haystack.views import SearchView
+from django.utils.feedgenerator import Rss201rev2Feed
+from Naga.settings import NAGA_WEB_URL
 import json
 
 
@@ -143,7 +145,24 @@ class BlogAPI(viewsets.ModelViewSet):
 
 # RSS
 class RssFeed(Feed):
-    pass
+    feed_type = Rss201rev2Feed
+
+    description = Siteinfo.objects.first().title
+    feed_url = urljoin(NAGA_WEB_URL, 'feed')
+    title = Siteinfo.objects.first().title
+    link = NAGA_WEB_URL
+
+    def items(self):
+        return Blog.objects.all().order_by('-update_at')
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.summary
+
+    def item_link(self, item):
+        return item.get_absolute_url()
 
 
 class QSearchView(SearchView):
@@ -160,9 +179,6 @@ class QSearchView(SearchView):
         adsense = Adsense.objects.all()
         context['ad_list'] = adsense
         return context
-
-
-
 
 
 # 异常

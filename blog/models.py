@@ -43,10 +43,14 @@ class Blog(models.Model):
     def __str__(self):
         return self.title   # 后台显示标题
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('blog:details', args=[self.id])
+
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = "文章"  # 类的复数
-        ordering = ['-create_at']
+        ordering = ['-update_at']
 
 
 class Message(models.Model):
