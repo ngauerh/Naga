@@ -12,7 +12,7 @@ chmod 777 start.sh
 
 
 ## 运行截图
-![](https://i.imgur.com/omVoltq.png)
+![](https://i.imgur.com/EIpyiFY.png)
 
 
 
@@ -66,7 +66,7 @@ def ChineseAnalyzer():
 
 </pre>
 
-再把 haystack/backends/whoosh_backends.py 文件复制一份到当前目录下，重命名为 whoosh_cn_backends.py（之前我们在 settings.py 中 的 HAYSTACK_CONNECTIONS 指定的就是这个文件），然后修改whoosh_cn_backends.py中的代码：
+再把 haystack/backends/whoosh_backends.py 文件复制一份到当前目录下，重命名为 whoosh_cn_backend.py（之前我们在 settings.py 中 的 HAYSTACK_CONNECTIONS 指定的就是这个文件），然后修改whoosh_cn_backend.py中的代码：
 
 <pre>
 # 顶部引入刚才添加的中文分词
@@ -87,3 +87,6 @@ schema_fields[field_class.index_fieldname] = TEXT(stored=True, analyzer=ChineseA
 
 建立索引文件
 运行命令 python manage.py rebuild_index
+
+
+**其实搜索功能使用google adsense的搜索广告会更好**

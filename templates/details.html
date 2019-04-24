@@ -10,7 +10,7 @@
     <meta name="Keywords" content="{{ blog_list.tags }}, {{ blog_list.category }}">
 
     <title>{{ blog_list.title }}</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
 
 {% endblock %}
 
@@ -40,6 +40,16 @@
 
 
     <hr>
+    <div>
+    <a  data-sharer="weibo"
+       data-title="{{ blog_list.title }}"
+       data-url="{% url 'blog:details' blog_list.title %}">
+    <img src="{% static '/icon/weibo.png' %}" alt=""></a>
+    <a  data-sharer="twitter"
+       data-title="{{ blog_list.title }}"
+       data-url="{% url 'blog:details' blog_list.title %}">
+    <img src="{% static '/icon/twitter.png' %}" alt=""></a>
+    </div>
 
 {% for tag in tag_list %}
     <a href="{% url 'blog:blogtags' %}?tid={{ tag.id }}">
