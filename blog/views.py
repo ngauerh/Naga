@@ -66,22 +66,22 @@ def index(request):
 def blog_details(request, bid):
     context = loadinfo()
     try:
-        blog = Blog.objects.get(id=bid)
+        blog = Blog.objects.get(title=bid)
         context['blog_list'] = blog
-        message = Message.objects.filter(mid=int(bid)).order_by('-pk')
+        message = Message.objects.filter(mid=blog.id).order_by('-pk')
         context['message_list'] = message
         tag = blog.tags.all()
         context['tag_list'] = tag
 
         response = render(request, 'details.html', context)
 
-        if not request.COOKIES.get('blog_{}_readed'.format(str(bid))):
+        if not request.COOKIES.get('blog_{}_readed'.format(str(blog.id))):
             blog.views += 1
             blog.save()
-            response.set_cookie('blog_{}_readed'.format(str(bid)), 'read', max_age=600)
+            response.set_cookie('blog_{}_readed'.format(str(blog.id)), 'read', max_age=600)
         return response
     except:
-        return redirect('/')
+        return render(request, 'error/404.html')
 
 
 # 标签页

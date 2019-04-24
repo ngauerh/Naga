@@ -49,7 +49,7 @@
         <el-card class="box-card" style="height: 95%; background:url('{% static 'bg/1.jpg' %}')">
             <div style="padding-top: 40%">
                 {% verbatim %}
-                <a :href = "'/b/details/'+  wen.id ">
+                <a :href = "'/b/details/'+  wen.title ">
                     <h3 style="text-align: center;color: grey">{{ wen.title }}</h3>
                 </a>
                 {% endverbatim %}
@@ -62,7 +62,7 @@
 {% for blog in blog_list %}
     <el-card class="box-card">
       <div class="text item">
-          <a href="{% url "blog:details" blog.id %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ blog.title }}</a>
+          <a href="{% url "blog:details" blog.title %}" style="font-size: 20px; font-weight: bold;color: #00CC66">{{ blog.title }}</a>
           <br>
           {{ blog.summary|safe }}
       </div>
@@ -81,7 +81,7 @@
         </span>
         {% endifnotequal %}
         <span style="font-size: 12px; float: right">
-            <a href="{% url "blog:details" blog.id %}" style="color: #CCCCFF">阅读更多>></a>
+            <a href="{% url "blog:details" blog.title %}" style="color: #CCCCFF">阅读更多>></a>
         </span>
     </el-card>
 <br>

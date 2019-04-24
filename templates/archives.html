@@ -18,7 +18,7 @@
       {% for blog in blog_list %}
         <el-timeline-item timestamp="{{ blog.create_at }}" placement="top">
           <el-card>
-              <a href="{% url 'blog:details' blog.id %}"><h4>{{ blog.title }}</h4></a>
+              <a href="{% url 'blog:details' blog.title %}"><h4>{{ blog.title }}</h4></a>
           </el-card>
         </el-timeline-item>
       {% endfor %}

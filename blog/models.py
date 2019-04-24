@@ -45,7 +45,7 @@ class Blog(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('blog:details', args=[self.id])
+        return reverse('blog:details', args=[self.title])
 
     class Meta:
         verbose_name = '文章'

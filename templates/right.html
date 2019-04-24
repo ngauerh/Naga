@@ -47,11 +47,11 @@
           {% for foo in tag_yun %}
               {% if foo.num_post > 0 %}
                   {% if foo.num_post <= 10 %}
-                    <font style="font-size:{{ foo.num_post|add:20 }}px;"><a href="{% url 'blog:blogtags' %}?tid={{ tag.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
+                    <font style="font-size:{{ foo.num_post|add:20 }}px;"><a href="{% url 'blog:blogtags' %}?tid={{ foo.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
                   {% elif foo.num_post > 20 %}
-                    <font style="font-size:{{ foo.num_post|add:30 }}px;"><a href="{% url 'blog:blogtags' %}?tid={{ tag.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
+                    <font style="font-size:{{ foo.num_post|add:30 }}px;"><a href="{% url 'blog:blogtags' %}?tid={{ foo.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
                   {% elif foo.num_post > 30 %}
-                    <font style="font-size:60px;"><a href="{% url 'blog:blogtags' %}?tid={{ tag.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
+                    <font style="font-size:60px;"><a href="{% url 'blog:blogtags' %}?tid={{ foo.id }}" style="color: #CCCCCC">{{ foo.tag }}&nbsp;</a></font>
                   {% endif %}
               {% endif %}
 

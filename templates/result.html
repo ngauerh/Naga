@@ -10,7 +10,7 @@
 {% block webbody %}
     <br>
 {% for blog in blog_list %}
-    <a href="{% url 'details' blog.id %}" style="font-size: 16px;color: darkslateblue">{{ blog.title }}</a>
+    <a href="{% url 'blog:details' blog.title %}" style="font-size: 16px;color: darkslateblue">{{ blog.title }}</a>
     <br>
     <hr><br>
 {% endfor %}

@@ -7,7 +7,7 @@ app_name = 'blog'
 
 
 extra_pattern = [
-    url(r'^details/(?P<bid>[0-9]+)$', blog_details, name='details'),
+    url(r'^details/(?P<bid>.+)$', blog_details, name='details'),
     url(r'^tags$', tags, name='tags'),
     url(r'^categories$', categories, name='categories'),
     url(r'^archives$', archives, name='archives'),
