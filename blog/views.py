@@ -1,3 +1,4 @@
+from django.db import OperationalError
 from django.shortcuts import render
 from .models import *
 from users.models import AboutMe
@@ -146,10 +147,13 @@ class BlogAPI(viewsets.ModelViewSet):
 # RSS
 class RssFeed(Feed):
     feed_type = Rss201rev2Feed
-
-    description = Siteinfo.objects.first().title
+    try:
+        description = Siteinfo.objects.first().title if Siteinfo.objects.first() else '无标题'
+        title = Siteinfo.objects.first().title if Siteinfo.objects.first() else '无标题'
+    except OperationalError:
+        description = '无标题'
+        title = '无标题'
     feed_url = urljoin(NAGA_WEB_URL, 'feed')
-    title = Siteinfo.objects.first().title
     link = NAGA_WEB_URL
 
     def items(self):

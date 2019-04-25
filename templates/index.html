@@ -44,6 +44,8 @@
 
 {% block webbody %}
 
+{% if commend_list %}
+
 <el-carousel :interval="4000" type="card" height="250px" style="margin-bottom: 5px">
     <el-carousel-item v-for="(wen,index) in commend_list" :key="index">
         <el-card class="box-card" style="height: 95%; background:url('{% static 'bg/1.jpg' %}')">
@@ -57,6 +59,8 @@
         </el-card>
     </el-carousel-item>
 </el-carousel>
+
+{% endif %}
 
 
 {% for blog in blog_list %}
