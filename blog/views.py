@@ -5,16 +5,13 @@ from users.models import AboutMe
 from rest_framework import viewsets
 from .serializers import BlogSerializer
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
-# Create your views here.
 from urllib.parse import urljoin
 from django.shortcuts import redirect, get_object_or_404
-from django.http import HttpResponse
 from django.contrib.syndication.views import Feed
 from django.db.models.aggregates import Count
 from haystack.views import SearchView
 from django.utils.feedgenerator import Rss201rev2Feed
 from Naga.settings import NAGA_WEB_URL
-import json
 
 
 # 公共的侧边栏信息
@@ -73,6 +70,10 @@ def blog_details(request, bid):
         context['message_list'] = message
         tag = blog.tags.all()
         context['tag_list'] = tag
+
+        # 上一篇，下一篇
+        context['previous_blog'] = Blog.objects.get(id=blog.id-1)
+        context['next_blog'] = Blog.objects.get(id=blog.id+1)
 
         response = render(request, 'details.html', context)
 

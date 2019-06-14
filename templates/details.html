@@ -19,90 +19,109 @@
 
 
 
-<h2 style="text-align: center">{{ blog_list.title }}</h2>
-<div style="text-align: center">
-    <span style="color: grey">分类：</span><span style="color: grey">{{ blog_list.category }}</span>
+    <h2 style="text-align: center">{{ blog_list.title }}</h2>
+    <div style="text-align: center">
+        <span style="color: grey">分类：</span><span style="color: grey">{{ blog_list.category }}</span>
         &nbsp;&nbsp;&nbsp;
-    {% ifnotequal blog_list.views 0 %}
-        <span style="font-size: 14px;color: grey">
+        {% ifnotequal blog_list.views 0 %}
+            <span style="font-size: 14px;color: grey">
             <i class="el-icon-view"></i>&nbsp;{{ blog_list.views }} 次阅读
         </span>
-    {% endifnotequal %}
-    &nbsp;&nbsp;&nbsp;
-    <span style="color: grey;"><i class="el-icon-date"></i> &nbsp;{{ blog_list.create_at|date:"M d Y" }}</span>
-</div>
-
-
-    <hr>
-        {{ blog_list.summary|safe }}
-
-        {{ blog_list.content|safe }}
-
-
-    <hr>
-    <div>
-    <a  data-sharer="weibo"
-       data-title="{{ blog_list.title }}"
-       data-url="{% url 'blog:details' blog_list.title %}">
-    <img src="{% static '/icon/weibo.png' %}" alt=""></a>
-    <a  data-sharer="twitter"
-       data-title="{{ blog_list.title }}"
-       data-url="{% url 'blog:details' blog_list.title %}">
-    <img src="{% static '/icon/twitter.png' %}" alt=""></a>
+        {% endifnotequal %}
+        &nbsp;&nbsp;&nbsp;
+        <span style="color: grey;"><i class="el-icon-date"></i> &nbsp;{{ blog_list.create_at|date:"M d Y" }}</span>
     </div>
 
-{% for tag in tag_list %}
-    <a href="{% url 'blog:blogtags' %}?tid={{ tag.id }}">
-    <el-button type="info" round>
-        {{ tag }}
-    </el-button>
-    </a>
 
-{% endfor %}
+    <hr>
+    {{ blog_list.summary|safe }}
 
+    {{ blog_list.content|safe }}
+
+
+    <hr>
+    <div style="text-align: center">
+        <el-popover
+                placement="bottom"
+                width="200"
+                trigger="click">
+            <a data-sharer="weibo"
+               data-title="{{ blog_list.title }}"
+               data-url="{% url 'blog:details' blog_list.title %}">
+                <img src="{% static '/icon/weibo.png' %}" alt=""></a>
+            <a data-sharer="twitter"
+               data-title="{{ blog_list.title }}"
+               data-url="{% url 'blog:details' blog_list.title %}">
+                <img src="{% static '/icon/twitter.png' %}" alt=""></a>
+            <el-button type="danger" slot="reference" icon="el-icon-share">分享</el-button>
+        </el-popover>
+    </div>
+
+    <br>
+
+    <div class="tag-group">
+        <span class="tag-group__title"><i class="el-icon-edit">:&nbsp;</i></span>
+        {% for tag in tag_list %}
+            <a href="{% url 'blog:blogtags' %}?tid={{ tag.id }}" title="查看关于{{ tag }}的文章">
+                <el-tag type="info" size="small">
+                    {{ tag }}
+                </el-tag>
+            </a>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div>
+        <el-button icon="el-icon-arrow-left">
+            <a href="{% url 'blog:details' previous_blog.title %}">{{ previous_blog.title }}</a>
+        </el-button>
+        <el-button style="float:right">
+            <a href="{% url 'blog:details' next_blog.title %}">{{ next_blog.title }}</a>
+            <i class="el-icon-arrow-right el-icon--right"></i>
+        </el-button>
+    </div>
     <br><br>
 
-<el-collapse>
-  <el-collapse-item title="评论" name="1">
-    <div>
+    <el-collapse>
+        <el-collapse-item title="评论" name="1">
+            <div>
 
-        <el-form ref="form"  action="{% url 'blog:comment' %}" method="post">
-        {% csrf_token %}
-            <el-input v-model="input_name" placeholder="请输入您的名字" name="username"></el-input>
-        <br><br>
-        <el-input v-model="input_email" placeholder="请输入您的邮箱" name="email"></el-input>
-        <br><br>
-        <el-input
-          type="textarea"
-          :rows="6"
-          placeholder="请输入您的评论"
-          name="message"
-          v-model="textarea_m">
-        </el-input>
-            <input type="hidden" name="bid" value="{{ blog_list.id }}">
-            <br><br>
-            <button  type="submit" class="el-button">提交</button>
-    </el-form>
-    </div>
+                <el-form ref="form" action="{% url 'blog:comment' %}" method="post">
+                    {% csrf_token %}
+                    <el-input v-model="input_name" placeholder="请输入您的名字" name="username"></el-input>
+                    <br><br>
+                    <el-input v-model="input_email" placeholder="请输入您的邮箱" name="email"></el-input>
+                    <br><br>
+                    <el-input
+                            type="textarea"
+                            :rows="6"
+                            placeholder="请输入您的评论"
+                            name="message"
+                            v-model="textarea_m">
+                    </el-input>
+                    <input type="hidden" name="bid" value="{{ blog_list.id }}">
+                    <br><br>
+                    <button type="submit" class="el-button">提交</button>
+                </el-form>
+            </div>
 
-  </el-collapse-item>
-</el-collapse>
+        </el-collapse-item>
+    </el-collapse>
 
 
     <br>
 
-{% for message in message_list %}
-    <el-card class="box-card">
-        <span style="font-size: 12px;color: grey">{{ message.name }}</span>
-        <span style="font-size: 12px; float: right; color: grey">{{ message.create_at }}</span>
-        <br><br>
-        <span>
+    {% for message in message_list %}
+        <el-card class="box-card">
+            <span style="font-size: 12px;color: grey">{{ message.name }}</span>
+            <span style="font-size: 12px; float: right; color: grey">{{ message.create_at }}</span>
+            <br><br>
+            <span>
             {{ message.message }}
         </span>
 
-    </el-card>
-    <br>
-{% endfor %}
+        </el-card>
+        <br>
+    {% endfor %}
 
 
 {% endblock %}
